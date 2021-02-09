@@ -8,6 +8,10 @@ int PGCD(int A, int B)
 	// Verification de la valeur des entrées
 	assert((A > 1 && A < 65535));
 	assert((B > 1 && B < 65535));
+	if(A == 0)
+		return B;
+	if(B == 0)
+		return A;
 	while(A != B)
 	{
 		if(A > B)
