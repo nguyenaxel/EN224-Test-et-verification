@@ -49,31 +49,34 @@ begin
 
     -- EDIT: Check that CLK is really your main clock signal
     CLK <= TbClock;
-
+ 
     stimuli : process
     begin
-        -- EDIT Adapt initialization as needed
-        idata_a  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 221, 32) );
-        idata_b  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 781, 32) );
-        idata_en <= '1';
-        while odata_en = '0' loop
-            idata_en <= '0';
-            wait for 10 ns;
-        end loop;
-
         -- Reset generation
         -- EDIT: Check that RESET is really your reset signal
         RESET <= '1';
         wait for 100 ns;
         RESET <= '0';
         wait for 100 ns;
+        idata_en <= '1';
+
+            
+        -- EDIT Adapt initialization as needed
+        idata_a  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 221, 32) );
+        idata_b  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 782, 32) );
+        
+        wait for 10 ns;
+        while odata_en = '0' loop
+        wait for 10 ns;
+        end loop;
+
+        ASSERT UNSIGNED( odata )= TO_UNSIGNED( 17, 32)  SEVERITY FAILURE;
 
         -- EDIT Add stimuli here
         wait for 100 * TbPeriod;
 
         -- Stop the clock and hence terminate the simulation
         TbSimEnded <= '1';
-        wait;
     end process;
 
 end tb;
