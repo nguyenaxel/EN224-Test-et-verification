@@ -52,24 +52,26 @@ int main (int argc, char * argv []){
 	printf("(II) Starting PGCD program\n");
 
 	// Declaration des variables
-	int pgcd = 0, pgcd2 = 0, nb_erreur = 0, j = 28;
+	int pgcd = 0, pgcd2 = 0, nb_erreur = 0;
 
 	// Verification du nombre des arguments
 	exit_if(argc != 1, "Aucun argument demandé"); // 1 argument : l'executable
 
 	// Calcul du PGCD
-	for(int i = 0; i < MAX_VALUE; i++)
+	for(int i = 0; i < sqrt(MAX_VALUE+1); i++)
 	{
-		pgcd = PGCD(i, j);
-		pgcd2 = PGCD2(i, j);
-		if(pgcd == pgcd2)
-			printf("Le PGCD de %5d et de %5d est %5d(validé)\n", i, j, pgcd);
-		else
+		for(int j = 0; j < sqrt(MAX_VALUE+1); j++)
 		{
-			printf("Erreur calcul PGCD %d != %d\n", pgcd, pgcd2);
-			nb_erreur++;
+			pgcd = PGCD(i, j);
+			pgcd2 = PGCD2(i, j);
+			if(pgcd == pgcd2)
+				printf("Le PGCD de %5d et de %5d est %5d(validé)\n", i, j, pgcd);
+			else
+			{
+				printf("Erreur calcul PGCD %d != %d\n", pgcd, pgcd2);
+				nb_erreur++;
+			}
 		}
-		
 	}
 
 	printf("Nombre d'erreur : %d\n", nb_erreur);
