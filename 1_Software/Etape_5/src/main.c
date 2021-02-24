@@ -23,15 +23,10 @@ int PGCD2(int A, int B)
 // Premiere methode calcul PGCD
 int PGCD(int A, int B)
 {
-	// Verification de la valeur des entrées
-	assert((A > 1 && A < 65535));
-	assert((B > 1 && B < 65535));
 	if(A == 0)
 		return B;
 	if(B == 0)
 		return A;
-	int pgcd2 = PGCD2(A, B);
-	
 	while(A != B)
 	{
 		if(A > B)
@@ -39,11 +34,6 @@ int PGCD(int A, int B)
 		else 
 			B = B - A;
 	}
-
-	// Verification de la valeur de sortie
-	assert((A > 1 && A < 65535));
-	assert((A == pgcd2));
-
 	return A;
 }
 
@@ -51,7 +41,7 @@ int main (int argc, char * argv []){
 	printf("(II) Starting PGCD program\n");
 
 	// Declaration des variables
-	int pgcd = 0, nb1 = 0, nb2 = 0;
+	int pgcd = 0, pgcd2 = 0, nb1 = 0, nb2 = 0;
 
 	// Verification du nombre des arguments
 	assert(argc == 3); // 3 arguments l'executable et les deux nombres
@@ -60,8 +50,20 @@ int main (int argc, char * argv []){
 	nb1 = atoi(argv[1]);
 	nb2 = atoi(argv[2]);
 
+	// Verification de la valeur des entrées
+	assert((nb1 > 0 && nb1 < 65535));
+	assert((nb2 > 0 && nb2 < 65535));
+
 	// Calcul du PGCD
 	pgcd = PGCD(nb1, nb2);
+	pgcd2 = PGCD2(nb1, nb2);
+
+	// Verification de la valeur de sortie
+	assert((pgcd > 0 && pgcd < 65535));
+	assert((pgcd > 0 && pgcd < 65535));
+
+	// Verification de l'égalité entre les deux méthodes de calcul
+	assert((pgcd == pgcd2));
 
 	printf("Le PGCD de %d et de %d est %d\n", nb1, nb2, pgcd);
 
