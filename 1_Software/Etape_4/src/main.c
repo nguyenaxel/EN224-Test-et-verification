@@ -5,9 +5,6 @@
 
 int PGCD(int A, int B)
 {
-	// Verification de la valeur des entrées
-	assert((A > 1 && A < 65535));
-	assert((B > 1 && B < 65535));
 	if(A == 0)
 		return B;
 	if(B == 0)
@@ -35,6 +32,10 @@ int main (int argc, char * argv []){
 	// Recuperation des arguments
 	nb1 = atoi(argv[1]);
 	nb2 = atoi(argv[2]);
+
+	// Verification de la valeur des entrées
+	assert((nb1 > 1 && nb1 < 65535));
+	assert((nb2 > 1 && nb2 < 65535));
 
 	// Calcul du PGCD
 	pgcd = PGCD(nb1, nb2);
